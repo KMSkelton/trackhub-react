@@ -1,6 +1,11 @@
 import Home from "connected/Home"
+import DisplayTrackhub from "connected/DisplayTrackhub"
 
 const globalRoutes = [
+  {
+    path: "/trackhub",
+    component: DisplayTrackhub
+  },
   {
     path: "/",
     component: Home
