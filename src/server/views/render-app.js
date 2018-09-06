@@ -3,6 +3,7 @@ import { renderToString } from "react-dom/server"
 const vendorsUrl = "/assets/vendors.chunk.js"
 const appBundleUrl = "/assets/app.bundle.js"
 const appCssUrl = "/assets/app.css"
+const dallianceUrl = "/assets/dalliance.js"
 
 export default (component, storeData) => `<!DOCTYPE html>
 <html lang="en">
@@ -21,6 +22,7 @@ export default (component, storeData) => `<!DOCTYPE html>
     <div id="root">${renderToString(component)}</div>
     <script>window.__PRELOADED_STATE__ = ${JSON.stringify(storeData)}</script>
     <script src="${vendorsUrl}"></script>
+    <script src="${dallianceUrl}"></script>
     <script src="${appBundleUrl}"></script>
   </body>
 </html>`
