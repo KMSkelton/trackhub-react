@@ -26,24 +26,6 @@ class Home extends React.Component {
  constructor(props) {
   super(props)
  }
- componentDidMount() {
-  this.fetchData()
- }
-
- fetchData = () => {
- var url = `/data/api/talen_dimer/?assembled=False&page_size=1000`;
-
- axios({
-   url: url,
-   headers: {
-     "content-type": "application/json"
-   },
- })
-   .then((result) => {
-      console.log(result)
-   })
- }
-
  render() {
   return (
    <div className={styles.homepage}>

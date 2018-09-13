@@ -115,6 +115,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json", ".jsx"],
     alias: {
+      config: path.resolve(__dirname, "config"),
       connected: path.resolve(__dirname, "src", "shared", "components", "connected"),
       constants: path.resolve(__dirname, "src", "shared", "constants"),
       contexts: path.resolve(__dirname, "src", "shared", "contexts"),
@@ -125,5 +126,5 @@ module.exports = {
       svg: path.resolve(__dirname, "src", "shared", "svg"),
       libs: path.resolve(__dirname, "src", "shared", "libs")
     }
-  }
+  },
 }

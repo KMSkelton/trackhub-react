@@ -37,7 +37,8 @@ class TrackhubGenerator extends Component {
     e.preventDefault();
     if (allFieldsComplete(this.state)){
       let data = inputToJSON(this.state)
-      this.sendTrackhub(data)  
+      this.sendTrackhub(data)
+      this.render(<p>`Your data has been stored at ${response.data.hubPath}`</p>)
     } else {
       return false
     }

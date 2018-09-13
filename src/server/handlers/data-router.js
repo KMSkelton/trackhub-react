@@ -86,33 +86,24 @@ router.get("/api/*", function (req, res, next) {
 router.post("/auth", function (req, res, next) {
   try {
     const {
-      pass: password,
-      user: username
+      displayName: displayName,
+      email: email,
+      uid: uid
     } = req.body
 
-    const dataApi = req.app.get("dataApi")
+  if (displayName && uid && email) {
+    req.session.email = email
+    req.session.displayName = displayName
+    req.session.uid = uid
+    req.session.save()
+    res.status(200).send("Login successful!")
+    res.end
+  } else {
+    writeErrorForServerLog("/auth", "No displayName, uid, or email")
+    res.status(500).send("No displayName, uid, or email")
+    res.end()
+  }
 
-    axios({
-      url: `${dataApi}/api-token-auth/`,
-      method: "post",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: querystring.stringify({ password, username })
-    })
-      .then(({ data }) => {
-        req.session.dataToken = data.token
-        req.session.username = username
-        req.session.save()
-        res.status(200).send("Login successful.")
-        res.end()
-      })
-      .catch(e => {
-        writeErrorForServerLog("/auth", `${dataApi}/api-token-auth/`, e)
-        var errorReport = getErrorText(e)
-        res.status(errorReport.status).send(errorReport.text)
-        res.end()
-      })
   }
   catch (e) {
     writeErrorForServerLog("/auth", "", e)

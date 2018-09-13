@@ -20,10 +20,7 @@ class Login extends React.Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault()
-
-    const userValue = this.formRef.querySelector('[name="uname"]').value
-    const passValue = this.formRef.querySelector('[name="pword"]').value
-    this.context.store.dispatch(attemptLogin(userValue, passValue))
+    this.context.store.dispatch(attemptLogin())
     return false
   }
 
@@ -61,27 +58,11 @@ class Login extends React.Component {
                 ref={this.handleFormRef}
                 onSubmit={this.handleLoginSubmit}
               >
-                <div className={styles.entryRow}>
-                  <div className={styles.labelContainer}>
-                    <label htmlFor="uname">Username</label>
-                  </div>
-                  <div className={styles.fieldContainer}>
-                    <input placeholder="username" name="uname" id="uname" type="text" />
-                  </div>
-                </div>
-                <div className={styles.entryRow}>
-                  <div className={styles.labelContainer}>
-                    <label htmlFor="pword">Password</label>
-                  </div>
-                  <div className={styles.fieldContainer}>
-                    <input placeholder="password" type="password" name="pword" id="pword" />
-                  </div>
-                </div>
                 
                 { this.renderError() }
                 
                 <div className={styles.entryRow}>
-                  <button type="sumbit">Log In</button>
+                  <button type="sumbit">Log In with Google</button>
                 </div>
               </form>
             </SelectionPageContent>

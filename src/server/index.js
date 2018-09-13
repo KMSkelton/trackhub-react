@@ -11,10 +11,6 @@ require('dotenv').load()
 
 const server = express()
 
-const apiBase = process.env.API_BASE
-if (!apiBase) {
-  console.error("Cannot authenticate without an API_BASE in the .env file")
-}
 let options = {}
 let host = process.env.HOST || 'localhost'
 let serverPort = 3000
@@ -26,9 +22,6 @@ if (process.env.NODE_ENV === "production") {
     cert: readFileSync(process.env.SSL_CERT),
   };
 }
-
-// apply server setting variables
-server.set("dataApi", apiBase)
 
 // add in some security measures
 server.use(helmet())

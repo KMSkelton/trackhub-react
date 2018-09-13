@@ -23,7 +23,7 @@ export const removeEmpty = (data) => {
   return notEmpty
 }
 
-export const cleanEntry = (data) => {
+export const trimEntry = (data) => {
   data.map((entry) => {
     for (let i = 0; i < entry.length; i++) {
       entry[i] = entry[i].trim();

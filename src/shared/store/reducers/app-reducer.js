@@ -1,5 +1,7 @@
 import { Types as AppTypes} from "../constants/app-types"
 import { Types as LoginTypes} from "../constants/login-types"
+import { Types as FirebaseTypes } from "../constants/firebase-types"
+
 import ViewportTypes from "constants/viewport"
 
 const initialState = {
@@ -11,7 +13,6 @@ const initialState = {
   messages: [],
   modal: null,
   userDetails: {},
-  userPermissions: {},
   viewportSizeName: ViewportTypes.none,
   winHeight: 0,
   winScrollTop: 0,
@@ -38,10 +39,29 @@ export default function reducer(state = initialState, action) {
     case AppTypes.SET_IS_MOBILE_BROWSER:
       return {...state, isMobileBrowser: action.isMobile}
     case LoginTypes.LOGIN_FAIL:
+      console.log('LOGIN FAIL :', action);
       return {...state, loginErrorMessage: action.loginError}
     case LoginTypes.LOGIN_START:
     case LoginTypes.LOGIN_SUCCESS:
+      console.log('LOGIN SUCCESS :', action);
       return {...state, loginErrorMessage: null}
+    case FirebaseTypes.USER_CREATE_FAIL:
+      return state
+    case FirebaseTypes.USER_CREATE_START:
+      console.log('user create start')
+      return state
+    case FirebaseTypes.USER_CREATE_SUCCESS:
+      console.log('firebase user create success', action);
+      return {...state, userDetails: action['user'], userErrorMessage: null}
+    case FirebaseTypes.FETCH_USER_FAIL:
+      return {...state, userErrorMessage: action.fetchError}
+    case FirebaseTypes.FETCH_USER_START:
+      return state
+    case FirebaseTypes.FETCH_USER_SUCCESS:
+      console.log('firebase fetch_user_success:', action);
+      return {...state, userDetails: action['user'], uerErrorMessage: null}
+    case FirebaseTypes.USER_SESSION_LOAD:
+      return{...state, userDetails: action['user']}
     default:
       return state
   }
