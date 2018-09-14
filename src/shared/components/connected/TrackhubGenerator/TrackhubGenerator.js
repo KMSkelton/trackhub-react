@@ -6,6 +6,7 @@ import GenomeRetrieve from 'presentational/GenomeRetrieve/GenomeRetrieve';
 import RenderCSV from 'presentational/RenderCSV/RenderCSV';
 import {inputToJSON} from 'libs/inputToJSON/inputToJSON';
 import {allFieldsComplete} from 'libs/VerifyCSV/VerifyCSV';
+import UpdatePageView from 'presentational/UpdatePageView/UpdatePageView';
 
 class TrackhubGenerator extends Component {
   constructor(props) {
@@ -36,9 +37,8 @@ class TrackhubGenerator extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (allFieldsComplete(this.state)){
-      let data = inputToJSON(this.state)
+      let data = inputToJSON({...this.state})
       this.sendTrackhub(data)
-      this.render(<p>`Your data has been stored at ${response.data.hubPath}`</p>)
     } else {
       return false
     }
@@ -59,6 +59,9 @@ class TrackhubGenerator extends Component {
     })
     .then(response => {
       console.log('TRACKHUB SENT:', response);
+      this.setState(() => ({
+        trackhubURL: response.data.hubPath
+      }))
     })
     .catch(error => {
       console.error(error)
@@ -127,6 +130,7 @@ class TrackhubGenerator extends Component {
           <input type="submit" value="Submit" className={classes.button} />
         </form>
         <RenderCSV csv={this.state.samples}/>
+        <UpdatePageView data={this.state.trackhubURL}/>
       </React.Fragment>
     )
   }
