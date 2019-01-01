@@ -15,7 +15,9 @@
   "clean-dist": "npx rimraf ./dist/*",
   "start-prod": "NODE_ENV=production node dist/server.js",
   "start-dev": "NODE_ENV=development node dist/server.js",
-  "watch-dev": "nodemon --exec \"npm run build-dev && npm run start-dev\""
+  "watch-dev": "nodemon --exec \"npm run build-dev && npm run start-dev\"",
+  "start": "npm run clean-dist && npm run build-prod-client && npm run build-prod-server && npm run create-upload-dir && npm run start-prod"
+
  },
  "devDependencies": {
   "autoprefixer": "^8.4.1",
