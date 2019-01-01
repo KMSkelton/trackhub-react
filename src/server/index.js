@@ -13,7 +13,7 @@ const server = express()
 
 let options = {}
 let host = process.env.HOST || 'localhost'
-let serverPort = 3000
+let serverPort = 8081
 
 if (process.env.NODE_ENV === "production") {
   serverPort = 443

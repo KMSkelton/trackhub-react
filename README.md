@@ -85,5 +85,5 @@ import AwesomeComponent from "connected/AwesomeComponent"
 
 ### Notes:
 
-* Uses babel to transpile from ES6 javascript down to ES2015 compliant code.
+* Uses babel to transpile from ES6 javascript down to browser compliant code.
 * Currently uses sass via node-sass but would like to remove that in favor of css modules in the future
